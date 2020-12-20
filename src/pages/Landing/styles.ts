@@ -6,8 +6,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 40,
-    paddingVertical: 80,
+    paddingHorizontal: 48,
+    paddingVertical: 96,
     backgroundColor: theme.backgroundColor,
   },
   title: {
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     color: theme.secondaryColor,
     fontSize: 24,
     textAlign: 'center',
-    marginTop: 40,
+    marginTop: 48,
   },
   start: {
     fontFamily: 'Metamorphous_400Regular',
@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
     textShadowColor: theme.secondaryColor,
   },
   button: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingHorizontal: 24,
+    paddingVertical: 12,
   },
 });
 
