@@ -42,6 +42,10 @@ const styles = StyleSheet.create({
     textShadowRadius: 4,
     textShadowColor: theme.secondaryColor,
   },
+  button: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
 });
 
 export default styles;
