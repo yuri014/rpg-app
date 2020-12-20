@@ -1,10 +1,12 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import searchIcon from '../../assets/icons/magnifying-glass.png';
 
+import searchIcon from '../../assets/icons/magnifying-glass.png';
+import homeIcon from '../../assets/icons/wooden-door.png';
 import SearchPage from '../pages/Search';
 import theme from '../theme/global';
+import Home from '../pages/Home';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -23,6 +25,7 @@ function FooterTabs() {
         style: {
           elevation: 0,
           shadowOpacity: 0,
+          height: 48,
         },
         tabStyle: {
           flexDirection: 'column',
@@ -33,18 +36,28 @@ function FooterTabs() {
           fontFamily: 'Metamorphous_400Regular',
           fontSize: 12,
         },
+        inactiveBackgroundColor: '#fff',
+        activeBackgroundColor: '#ebebf5',
+        inactiveTintColor: '#86939e',
         activeTintColor: theme.backgroundColor,
       }}
     >
+      <Screen
+        name="Home"
+        component={Home}
+        data-test="icon-image"
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: () => <Image style={styles.icon} source={homeIcon} />,
+        }}
+      />
       <Screen
         name="Search"
         component={SearchPage}
         data-test="icon-image"
         options={{
           tabBarLabel: 'Search',
-          tabBarIcon: () => (
-            <Image style={styles.icon} source={searchIcon} />
-          ),
+          tabBarIcon: () => <Image style={styles.icon} source={searchIcon} />,
         }}
       />
     </Navigator>
