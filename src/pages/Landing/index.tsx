@@ -14,7 +14,7 @@ function Landing({ navigation }: Navigation) {
         <Text style={styles.title}>RPG-APP</Text>
         <Text style={styles.subtitle}>Simple way to search and save your DnD resources</Text>
       </View>
-      <RectButton style={styles.button} onPress={() => navigation?.navigate('Search Page')}>
+      <RectButton style={styles.button} onPress={() => navigation?.navigate('Footer Tabs')}>
         <Text style={styles.start}>Start</Text>
         <Image source={diceIcon} />
       </RectButton>
