@@ -2,7 +2,7 @@ import { NavigationProp } from '@react-navigation/native';
 
 export type RootStackParamList = {
   'Landing': undefined;
-  'Search Page': undefined;
+  'Footer Tabs': undefined;
 };
 
 type NavigateProp = NavigationProp<RootStackParamList, 'Landing'>;
