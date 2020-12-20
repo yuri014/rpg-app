@@ -1,22 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontFamily: 'Metamorphous_400Regular',
-  },
-});
+import diceIcon from '../../../assets/icons/dice-twenty-faces-twenty.png';
+
+import styles from './styles';
 
 function Landing() {
   return (
-    <View style={styles.container}>
-      <Text>HELLO WORLD</Text>
+    <View style={styles.pageContainer}>
+      <View>
+        <Text style={styles.title}>RPG-APP</Text>
+        <Text style={styles.subtitle}>Simple way to search and save your DnD resources</Text>
+      </View>
+      <View>
+        <Text style={styles.start}>Start</Text>
+        <Image source={diceIcon} />
+      </View>
     </View>
   );
 }
