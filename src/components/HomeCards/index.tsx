@@ -34,6 +34,7 @@ const HomeCards = ({
               <Text key={item} style={cardStyleContainer.subtitle}>
                 {item}
                 &nbsp;
+                &nbsp;
               </Text>
             ))}
           </View>
