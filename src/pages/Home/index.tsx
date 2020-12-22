@@ -78,7 +78,10 @@ function Home() {
                   icon: diceIcon,
                 },
               ]}
-              actions="Multiattack, Beak, Claws"
+              legend={{
+                title: 'Actions',
+                phrases: 'Multiattack, Beak, Claws',
+              }}
             />
           </HomeCards>
 
@@ -110,7 +113,10 @@ function Home() {
                   icon: cashIcon,
                 },
               ]}
-              actions="Multiattack, Beak, Claws"
+              legend={{
+                title: 'Strength Minimum',
+                phrases: '15',
+              }}
             />
           </HomeCards>
 
@@ -142,7 +148,10 @@ function Home() {
                   icon: cashIcon,
                 },
               ]}
-              actions="Multiattack, Beak, Claws"
+              legend={{
+                title: 'Properties',
+                phrases: 'Two-handed, Heavy',
+              }}
             />
           </HomeCards>
         </View>

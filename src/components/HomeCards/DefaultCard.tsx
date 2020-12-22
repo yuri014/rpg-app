@@ -12,10 +12,13 @@ interface BlockImage {
 
 interface DefaultCardProps {
   items: Array<BlockImage>;
-  actions: string;
+  legend: {
+    title: string;
+    phrases: string;
+  };
 }
 
-const DefaultCard = ({ items, actions }: DefaultCardProps) => (
+const DefaultCard = ({ items, legend }: DefaultCardProps) => (
   <View>
     <View style={cardStyleContainer.cardImages}>
       {items.map((item) => (
@@ -35,8 +38,10 @@ const DefaultCard = ({ items, actions }: DefaultCardProps) => (
     </View>
     <View style={spellStyleCard.classes}>
       <Text style={spellStyleCard.classTitle}>
-        Actions: &nbsp;
-        <Text style={spellStyleCard.classContent}>{actions}</Text>
+        {legend.title}
+        :
+        &nbsp;
+        <Text style={spellStyleCard.classContent}>{legend.phrases}</Text>
       </Text>
     </View>
   </View>
