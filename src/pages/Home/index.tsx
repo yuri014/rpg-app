@@ -10,11 +10,21 @@ import SpellHomeCard from '../../components/HomeCards/SpellHomeCard';
 
 import monsterTitleIcon from '../../../assets/icons/wyvern.png';
 import monsterCardIcon from '../../../assets/icons/werewolf.png';
-import MonsterCard from '../../components/HomeCards/MonsterCard';
+
+import armorTitleIcon from '../../../assets/icons/battle-gear.png';
+import armorCardIcon from '../../../assets/icons/heavy-helm.png';
+
+import weaponTitleIcon from '../../../assets/icons/crossed-swords.png';
+import weaponCardIcon from '../../../assets/icons/scabbard.png';
 
 import shieldIcon from '../../../assets/icons/round-shield.png';
 import hpIcon from '../../../assets/icons/life-bar.png';
 import diceIcon from '../../../assets/icons/dice-card.png';
+import strIcon from '../../../assets/icons/biceps.png';
+import cashIcon from '../../../assets/icons/cash.png';
+import rangeIcon from '../../../assets/icons/archery-target.png';
+
+import DefaultCard from '../../components/HomeCards/DefaultCard';
 
 function Home() {
   return (
@@ -50,10 +60,88 @@ function Home() {
             title="Day's Monster"
             data-test="home-card-component"
           >
-            <MonsterCard
-              shieldIcon={shieldIcon}
-              diceIcon={diceIcon}
-              hpIcon={hpIcon}
+            <DefaultCard
+              items={[
+                {
+                  label: 'AC',
+                  value: '11',
+                  icon: shieldIcon,
+                },
+                {
+                  label: 'HP',
+                  value: '59',
+                  icon: hpIcon,
+                },
+                {
+                  label: 'HD',
+                  value: '7d10',
+                  icon: diceIcon,
+                },
+              ]}
+              actions="Multiattack, Beak, Claws"
+            />
+          </HomeCards>
+
+          <HomeCards
+            titleImage={armorTitleIcon}
+            cardImage={armorCardIcon}
+            header={{
+              title: 'Padded',
+              subtitle: ['Category: Light', 'Weight: 8'],
+            }}
+            title="Day's Armor"
+            data-test="home-card-component"
+          >
+            <DefaultCard
+              items={[
+                {
+                  label: 'AC',
+                  value: '11',
+                  icon: shieldIcon,
+                },
+                {
+                  label: 'Min Str',
+                  value: '0',
+                  icon: strIcon,
+                },
+                {
+                  label: 'Cost',
+                  value: '5',
+                  icon: cashIcon,
+                },
+              ]}
+              actions="Multiattack, Beak, Claws"
+            />
+          </HomeCards>
+
+          <HomeCards
+            titleImage={weaponTitleIcon}
+            cardImage={weaponCardIcon}
+            header={{
+              title: 'Greataxe',
+              subtitle: ['Category: Martial', 'Range: Melee'],
+            }}
+            title="Day's Weapon"
+            data-test="home-card-component"
+          >
+            <DefaultCard
+              items={[
+                {
+                  label: 'DD',
+                  value: '1d12',
+                  icon: diceIcon,
+                },
+                {
+                  label: 'Range',
+                  value: '5',
+                  icon: rangeIcon,
+                },
+                {
+                  label: 'Cost',
+                  value: '30',
+                  icon: cashIcon,
+                },
+              ]}
               actions="Multiattack, Beak, Claws"
             />
           </HomeCards>
