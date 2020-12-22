@@ -45,12 +45,13 @@ export const cardStyleContainer = StyleSheet.create({
   title: {
     fontFamily: 'Metamorphous_400Regular',
     color: theme.backgroundColor,
-    fontSize: 22,
+    fontSize: 18,
+    paddingRight: 12,
   },
   subtitle: {
     fontFamily: 'Metamorphous_400Regular',
     color: theme.contrastColor,
-    fontSize: 12,
+    fontSize: 10,
   },
   cardImages: {
     marginTop: 11,
