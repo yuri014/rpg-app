@@ -26,7 +26,7 @@ const HomeCards = ({
     </View>
     <View style={cardStyleContainer.container}>
       <View style={cardStyleContainer.cardHeader}>
-        <Image style={{ width: 48, height: 48 }} source={cardImage} />
+        <Image style={cardStyleContainer.imageStyle} source={cardImage} />
         <View style={cardStyleContainer.headerText}>
           <Text style={cardStyleContainer.title}>{header.title}</Text>
           <View style={cardStyleContainer.cardHeader}>
