@@ -2,12 +2,14 @@ import { StyleSheet } from 'react-native';
 import theme from '../../theme/global';
 
 const styles = StyleSheet.create({
-  container: {
+  backgroundPage: {
     backgroundColor: theme.backgroundColor,
+  },
+  container: {
     flex: 1,
     alignItems: 'center',
-    paddingHorizontal: 24,
     paddingTop: 72,
+    marginBottom: 24,
   },
 });
 
