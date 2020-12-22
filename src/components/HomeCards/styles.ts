@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 import theme from '../../theme/global';
 
@@ -30,6 +30,8 @@ export const cardStyleContainer = StyleSheet.create({
     shadowColor: theme.secondaryColor,
     elevation: 5,
     padding: 24,
+    width: Dimensions.get('window').width - 48,
+    alignSelf: 'stretch',
   },
   cardHeader: {
     flexDirection: 'row',
@@ -50,6 +52,40 @@ export const cardStyleContainer = StyleSheet.create({
     color: theme.contrastColor,
     fontSize: 10,
   },
+  cardImages: {
+    marginTop: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  imageStyle: {
+    width: 48,
+    height: 48,
+  },
+  imagesDescriptionContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  descriptionStats: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    justifyContent: 'space-between',
+  },
+  labelStat: {
+    marginTop: 6,
+    color: theme.backgroundColor,
+    fontFamily: 'Metamorphous_400Regular',
+  },
+  valueStatContainer: {
+    backgroundColor: theme.backgroundColor,
+    marginLeft: 4,
+    padding: 1,
+    borderRadius: 4,
+  },
+  valueStat: {
+    color: '#fff',
+    fontFamily: 'Signika_400Regular',
+  },
 });
 
 export const spellStyleCard = StyleSheet.create({
@@ -66,11 +102,11 @@ export const spellStyleCard = StyleSheet.create({
   classTitle: {
     fontFamily: 'Metamorphous_400Regular',
     color: theme.secondaryColor,
-    fontSize: 10,
+    fontSize: 12,
   },
   classContent: {
     fontFamily: 'Signika_300Light',
     color: theme.textPrimaryColor,
-    fontSize: 10,
+    fontSize: 12,
   },
 });
