@@ -2,11 +2,15 @@ import { StyleSheet } from 'react-native';
 import theme from '../../theme/global';
 
 const styles = StyleSheet.create({
-  container: {
+  backgroundContainer: {
     backgroundColor: theme.backgroundColor,
+  },
+  container: {
     flex: 1,
     justifyContent: 'space-around',
-    padding: 48,
+    padding: 36,
+    paddingTop: 0,
+    backgroundColor: theme.backgroundColor,
   },
   searchContainer: {
     backgroundColor: theme.lightBackgroundColor,
