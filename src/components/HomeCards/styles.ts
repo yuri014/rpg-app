@@ -45,15 +45,15 @@ export const cardStyleContainer = StyleSheet.create({
   title: {
     fontFamily: 'Metamorphous_400Regular',
     color: theme.backgroundColor,
-    fontSize: 16,
+    fontSize: 22,
   },
   subtitle: {
     fontFamily: 'Metamorphous_400Regular',
     color: theme.contrastColor,
-    fontSize: 10,
+    fontSize: 12,
   },
   cardImages: {
-    marginTop: 12,
+    marginTop: 11,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -65,6 +65,7 @@ export const cardStyleContainer = StyleSheet.create({
   imagesDescriptionContainer: {
     flexDirection: 'column',
     alignItems: 'center',
+    marginTop: 12,
   },
   descriptionStats: {
     flexDirection: 'row',
@@ -90,14 +91,15 @@ export const cardStyleContainer = StyleSheet.create({
 
 export const spellStyleCard = StyleSheet.create({
   description: {
-    marginTop: 12,
+    marginTop: 24,
     fontFamily: 'Signika_300Light',
     color: theme.textPrimaryColor,
+    fontSize: 14,
   },
   classes: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    marginTop: 12,
+    marginTop: 24,
   },
   classTitle: {
     fontFamily: 'Metamorphous_400Regular',
