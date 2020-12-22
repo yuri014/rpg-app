@@ -25,11 +25,13 @@ import cashIcon from '../../../assets/icons/cash.png';
 import rangeIcon from '../../../assets/icons/archery-target.png';
 
 import DefaultCard from '../../components/HomeCards/DefaultCard';
+import ReturnButton from '../../components/ReturnButton';
 
 function Home() {
   return (
     <SafeAreaView data-test="home-page">
       <ScrollView style={styles.backgroundPage}>
+        <ReturnButton />
         <View style={styles.container}>
           <HomeCards
             titleImage={spellTitleIcon}
