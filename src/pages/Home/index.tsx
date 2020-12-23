@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, ScrollView, View } from 'react-native';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import AppLoading from 'expo-app-loading';
 
 import styles from './style';
 import HomeCards from '../../components/HomeCards';
+import DefaultCard from '../../components/HomeCards/DefaultCard';
+import ReturnButton from '../../components/ReturnButton';
+import { GET_ARMOR_DATA, GET_CARD_DATA } from './homeQuery';
 
 import spellTitleIcon from '../../../assets/icons/magic-swirl.png';
 import spellBookIcon from '../../../assets/icons/spell-book.png';
@@ -25,68 +28,27 @@ import diceIcon from '../../../assets/icons/dice-card.png';
 import strIcon from '../../../assets/icons/biceps.png';
 import cashIcon from '../../../assets/icons/cash.png';
 import rangeIcon from '../../../assets/icons/archery-target.png';
-
-import DefaultCard from '../../components/HomeCards/DefaultCard';
-import ReturnButton from '../../components/ReturnButton';
+import swordClash from '../../../assets/icons/sword-clash.png';
 
 function Home() {
-  const randomValue = (max: number) => Math.round(Math.random() * (1 - max) + max);
-  const [random, setRandom] = useState({ randomSpell: 0, randomWeapon: 0, randomMonster: 0 });
-
-  const GET_CARD_DATA = gql`
-    query getAll($randomSpell: Int!, $randomMonster: Int!, $randomWeapon: Int!) {
-      spell(skip: $randomSpell) {
-        index
-        name
-        level
-        range
-        school {
-          name
-        }
-        desc
-        classes {
-          name
-        }
-      }
-      equipment(filter: { equipment_category: { name: "Weapon" } }, skip: $randomWeapon) {
-        equipment_category {
-          name
-        }
-        weapon_category
-        weapon_range
-        cost {
-          quantity
-        }
-        name
-        range {
-          normal
-        }
-        properties {
-          name
-        }
-      }
-      monster(skip: $randomMonster) {
-        armor_class
-        hit_points
-        hit_dice
-        actions {
-          name
-        }
-        name
-        size
-        type
-      }
-    }
-  `;
+  const randomValue = (max: number) => Math.round(Math.random() * max);
+  const [random, setRandom] = useState({
+    randomSpell: 0,
+    randomWeapon: 0,
+    randomArmor: 0,
+    randomMonster: 0,
+  });
 
   useEffect(() => {
-    const randomSpell = randomValue(319);
-    const randomWeapon = randomValue(64);
-    const randomMonster = randomValue(322);
+    const randomSpell = randomValue(318);
+    const randomWeapon = randomValue(36);
+    const randomMonster = randomValue(331);
+    const randomArmor = randomValue(12);
     setRandom({
       randomSpell,
       randomWeapon,
       randomMonster,
+      randomArmor,
     });
   }, []);
 
@@ -98,7 +60,13 @@ function Home() {
     },
   });
 
-  if (loading) return <AppLoading />;
+  const { loading: loadingArmor, data: armorData } = useQuery(GET_ARMOR_DATA, {
+    variables: {
+      randomArmor: random.randomArmor,
+    },
+  });
+
+  if (loading || loadingArmor) return <AppLoading />;
 
   const handleCardLegendArray = (legend: []) => legend.map((name: { [key: string]: string }) => name.name).join(', ');
 
@@ -120,11 +88,83 @@ function Home() {
             }}
             title="Lucky Spell"
           >
-            <SpellHomeCard
-              classes={handleCardLegendArray(data.spell.classes)}
-            >
+            <SpellHomeCard classes={handleCardLegendArray(data.spell.classes)}>
               {data.spell.desc}
             </SpellHomeCard>
+          </HomeCards>
+
+          <HomeCards
+            titleImage={weaponTitleIcon}
+            cardImage={weaponCardIcon}
+            header={{
+              title: data.equipment.name,
+              subtitle: [
+                `Category: ${data.equipment.weapon_category}`,
+                `Range: ${data.equipment.weapon_range}`,
+              ],
+            }}
+            title="Lucky Weapon"
+          >
+            <DefaultCard
+              items={[
+                {
+                  label: 'DD',
+                  value: data.equipment.damage.damage_dice,
+                  icon: diceIcon,
+                },
+                {
+                  label: 'Range',
+                  value: data.equipment.range.normal,
+                  icon: rangeIcon,
+                },
+                {
+                  label: 'Cost',
+                  value: `${data.equipment.cost.quantity} GP`,
+                  icon: cashIcon,
+                },
+              ]}
+              legend={{
+                title: 'Properties',
+                phrases: handleCardLegendArray(data.equipment.properties),
+              }}
+            />
+          </HomeCards>
+
+          <HomeCards
+            titleImage={armorTitleIcon}
+            cardImage={armorCardIcon}
+            header={{
+              title: armorData.equipment.name,
+              subtitle: [
+                `Category: ${armorData.equipment.equipment_category.name}`,
+                `Weight: ${armorData.equipment.weight}`,
+              ],
+            }}
+            title="Lucky Armor"
+          >
+            <DefaultCard
+              items={[
+                {
+                  label: 'AC',
+                  value: armorData.equipment.armor_class.base,
+                  icon: shieldIcon,
+                },
+                {
+                  label: 'Min Str',
+                  value: armorData.equipment.str_minimum,
+                  icon: strIcon,
+                },
+                {
+                  label: 'Cost',
+                  value: `${armorData.equipment.cost.quantity} GP`,
+                  icon: cashIcon,
+                },
+              ]}
+              legend={{
+                title: 'Stealth Disadvantage',
+                phrases: `${armorData.equipment.stealth_disadvantage}`,
+              }}
+            />
           </HomeCards>
 
           <HomeCards
@@ -149,82 +189,14 @@ function Home() {
                   icon: hpIcon,
                 },
                 {
-                  label: 'HD',
-                  value: data.monster.hit_dice,
-                  icon: diceIcon,
+                  label: 'CR',
+                  value: data.monster.challenge_rating,
+                  icon: swordClash,
                 },
               ]}
               legend={{
                 title: 'Actions',
                 phrases: handleCardLegendArray(data.monster.actions),
-              }}
-            />
-          </HomeCards>
-
-          <HomeCards
-            titleImage={armorTitleIcon}
-            cardImage={armorCardIcon}
-            header={{
-              title: 'Padded',
-              subtitle: ['Category: Light', 'Weight: 8'],
-            }}
-            title="Lucky Armor"
-          >
-            <DefaultCard
-              items={[
-                {
-                  label: 'AC',
-                  value: '11',
-                  icon: shieldIcon,
-                },
-                {
-                  label: 'Min Str',
-                  value: '0',
-                  icon: strIcon,
-                },
-                {
-                  label: 'Cost',
-                  value: '5',
-                  icon: cashIcon,
-                },
-              ]}
-              legend={{
-                title: 'Strength Minimum',
-                phrases: '15',
-              }}
-            />
-          </HomeCards>
-
-          <HomeCards
-            titleImage={weaponTitleIcon}
-            cardImage={weaponCardIcon}
-            header={{
-              title: 'Greataxe',
-              subtitle: ['Category: Martial', 'Range: Melee'],
-            }}
-            title="Lucky Weapon"
-          >
-            <DefaultCard
-              items={[
-                {
-                  label: 'DD',
-                  value: '1d12',
-                  icon: diceIcon,
-                },
-                {
-                  label: 'Range',
-                  value: '5',
-                  icon: rangeIcon,
-                },
-                {
-                  label: 'Cost',
-                  value: '30',
-                  icon: cashIcon,
-                },
-              ]}
-              legend={{
-                title: 'Properties',
-                phrases: 'Two-handed, Heavy',
               }}
             />
           </HomeCards>
