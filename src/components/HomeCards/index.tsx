@@ -31,7 +31,7 @@ const HomeCards = ({
           <Text style={cardStyleContainer.title}>{header.title}</Text>
           <View style={cardStyleContainer.cardHeader}>
             {header.subtitle.map((item) => (
-              <Text key={item} style={cardStyleContainer.subtitle}>
+              <Text key={item[0]} style={cardStyleContainer.subtitle}>
                 {item}
                 &nbsp;
                 &nbsp;
