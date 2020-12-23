@@ -9,7 +9,7 @@ import styles from './styles';
 
 function Landing({ navigation }: Navigation) {
   return (
-    <View data-test="landing-page" style={styles.pageContainer}>
+    <View style={styles.pageContainer}>
       <View>
         <Text style={styles.title}>RPG-APP</Text>
         <Text style={styles.subtitle}>Simple way to search and save your DnD resources</Text>

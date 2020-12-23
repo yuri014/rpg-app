@@ -103,7 +103,7 @@ function Home() {
   const handleCardLegendArray = (legend: []) => legend.map((name: { [key: string]: string }) => name.name).join(', ');
 
   return (
-    <SafeAreaView data-test="home-page">
+    <SafeAreaView>
       <ScrollView style={styles.backgroundPage}>
         <ReturnButton />
         <View style={styles.container}>
@@ -119,7 +119,6 @@ function Home() {
               ],
             }}
             title="Lucky Spell"
-            data-test="home-card-component"
           >
             <SpellHomeCard
               classes={handleCardLegendArray(data.spell.classes)}
@@ -136,7 +135,6 @@ function Home() {
               subtitle: [`Size: ${data.monster.size}`, `Type: ${data.monster.type}`],
             }}
             title="Lucky Monster"
-            data-test="home-card-component"
           >
             <DefaultCard
               items={[
@@ -171,7 +169,6 @@ function Home() {
               subtitle: ['Category: Light', 'Weight: 8'],
             }}
             title="Lucky Armor"
-            data-test="home-card-component"
           >
             <DefaultCard
               items={[
@@ -206,7 +203,6 @@ function Home() {
               subtitle: ['Category: Martial', 'Range: Melee'],
             }}
             title="Lucky Weapon"
-            data-test="home-card-component"
           >
             <DefaultCard
               items={[

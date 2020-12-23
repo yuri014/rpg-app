@@ -12,7 +12,7 @@ function SearchPage() {
   return (
     <>
       <ReturnButton />
-      <View style={styles.container} data-test="search-page">
+      <View style={styles.container}>
         <View>
           <SearchBar
             placeholder="Search..."
