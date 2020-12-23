@@ -13,6 +13,6 @@ describe('renders without error', () => {
   test('renders three screens without error', () => {
     const wrapper = shallow(<FooterTabs />);
     const screens = findByTestAttribute(wrapper, 'icon-image');
-    expect(screens.length).toBe(3);
+    expect(screens.length).toBe(2);
   });
 });
