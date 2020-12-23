@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, ScrollView, View } from 'react-native';
+import { gql, useQuery } from '@apollo/client';
+import AppLoading from 'expo-app-loading';
 
 import styles from './style';
 import HomeCards from '../../components/HomeCards';
@@ -28,6 +30,78 @@ import DefaultCard from '../../components/HomeCards/DefaultCard';
 import ReturnButton from '../../components/ReturnButton';
 
 function Home() {
+  const randomValue = (max: number) => Math.round(Math.random() * (1 - max) + max);
+  const [random, setRandom] = useState({ randomSpell: 0, randomWeapon: 0, randomMonster: 0 });
+
+  const GET_CARD_DATA = gql`
+    query getAll($randomSpell: Int!, $randomMonster: Int!, $randomWeapon: Int!) {
+      spell(skip: $randomSpell) {
+        index
+        name
+        level
+        range
+        school {
+          name
+        }
+        desc
+        classes {
+          name
+        }
+      }
+      equipment(filter: { equipment_category: { name: "Weapon" } }, skip: $randomWeapon) {
+        equipment_category {
+          name
+        }
+        weapon_category
+        weapon_range
+        cost {
+          quantity
+        }
+        name
+        range {
+          normal
+        }
+        properties {
+          name
+        }
+      }
+      monster(skip: $randomMonster) {
+        armor_class
+        hit_points
+        hit_dice
+        actions {
+          name
+        }
+        name
+        size
+        type
+      }
+    }
+  `;
+
+  useEffect(() => {
+    const randomSpell = randomValue(319);
+    const randomWeapon = randomValue(64);
+    const randomMonster = randomValue(322);
+    setRandom({
+      randomSpell,
+      randomWeapon,
+      randomMonster,
+    });
+  }, []);
+
+  const { loading, data } = useQuery(GET_CARD_DATA, {
+    variables: {
+      randomSpell: random.randomSpell,
+      randomWeapon: random.randomWeapon,
+      randomMonster: random.randomMonster,
+    },
+  });
+
+  if (loading) return <AppLoading />;
+
+  const handleCardLegendArray = (legend: []) => legend.map((name: { [key: string]: string }) => name.name).join(', ');
+
   return (
     <SafeAreaView data-test="home-page">
       <ScrollView style={styles.backgroundPage}>
@@ -37,18 +111,20 @@ function Home() {
             titleImage={spellTitleIcon}
             cardImage={spellBookIcon}
             header={{
-              title: 'Detect Magic',
-              subtitle: ['Lv: 1', 'Range: Self', 'School: Divination'],
+              title: data.spell.name,
+              subtitle: [
+                `Lv: ${data.spell.level}`,
+                `Range: ${data.spell.range}`,
+                `School: ${data.spell.school.name}`,
+              ],
             }}
-            title="Day's Spells"
+            title="Lucky Spell"
             data-test="home-card-component"
           >
-            <SpellHomeCard classes="Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Wizard">
-              For the duration, you sense the presence of magic within 30 feet of you. If you sense
-              magic in this way, you can use your action to see a faint aura around any visible
-              creature or object in the area that bears magic, and you learn its school of magic, if
-              any. The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1
-              inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.
+            <SpellHomeCard
+              classes={handleCardLegendArray(data.spell.classes)}
+            >
+              {data.spell.desc}
             </SpellHomeCard>
           </HomeCards>
 
@@ -56,33 +132,33 @@ function Home() {
             titleImage={monsterTitleIcon}
             cardImage={monsterCardIcon}
             header={{
-              title: 'Griffon',
-              subtitle: ['Size: Large', 'Type: Monstrosity'],
+              title: data.monster.name,
+              subtitle: [`Size: ${data.monster.size}`, `Type: ${data.monster.type}`],
             }}
-            title="Day's Monster"
+            title="Lucky Monster"
             data-test="home-card-component"
           >
             <DefaultCard
               items={[
                 {
                   label: 'AC',
-                  value: '11',
+                  value: data.monster.armor_class,
                   icon: shieldIcon,
                 },
                 {
                   label: 'HP',
-                  value: '59',
+                  value: data.monster.hit_points,
                   icon: hpIcon,
                 },
                 {
                   label: 'HD',
-                  value: '7d10',
+                  value: data.monster.hit_dice,
                   icon: diceIcon,
                 },
               ]}
               legend={{
                 title: 'Actions',
-                phrases: 'Multiattack, Beak, Claws',
+                phrases: handleCardLegendArray(data.monster.actions),
               }}
             />
           </HomeCards>
@@ -94,7 +170,7 @@ function Home() {
               title: 'Padded',
               subtitle: ['Category: Light', 'Weight: 8'],
             }}
-            title="Day's Armor"
+            title="Lucky Armor"
             data-test="home-card-component"
           >
             <DefaultCard
@@ -129,7 +205,7 @@ function Home() {
               title: 'Greataxe',
               subtitle: ['Category: Martial', 'Range: Melee'],
             }}
-            title="Day's Weapon"
+            title="Lucky Weapon"
             data-test="home-card-component"
           >
             <DefaultCard
