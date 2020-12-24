@@ -8,8 +8,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-around',
-    padding: 36,
-    paddingTop: 0,
+    paddingHorizontal: 36,
     backgroundColor: theme.backgroundColor,
   },
   searchContainer: {
@@ -45,6 +44,24 @@ const styles = StyleSheet.create({
     fontFamily: 'Metamorphous_400Regular',
     textAlign: 'center',
     marginTop: 24,
+  },
+  buttonGroupContainer: {
+    backgroundColor: theme.lightBackgroundColor,
+    borderColor: theme.lightBackgroundColor,
+    paddingVertical: 0,
+    paddingHorizontal: 0,
+    width: '100%',
+    alignSelf: 'center',
+  },
+  buttonGroup: {
+    backgroundColor: theme.backgroundColor,
+    color: theme.lightBackgroundColor,
+  },
+  buttonGroupActive: {
+    backgroundColor: theme.lightBackgroundColor,
+  },
+  buttonGroupText: {
+    color: theme.lightBackgroundColor,
   },
 });
 
