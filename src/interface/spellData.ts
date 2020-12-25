@@ -22,22 +22,22 @@ export interface ISpell {
   school: ClassesEntityOrDamageTypeOrDcTypeOrSchoolOrSubclassesEntity;
   subclasses?: (ClassesEntityOrDamageTypeOrDcTypeOrSchoolOrSubclassesEntity1 | null)[] | null;
 }
-export interface AreaOfEffect {
+interface AreaOfEffect {
   __typename: string;
   size: number;
   type: string;
 }
-export interface ClassesEntityOrDamageTypeOrDcTypeOrSchoolOrSubclassesEntity {
+interface ClassesEntityOrDamageTypeOrDcTypeOrSchoolOrSubclassesEntity {
   __typename: string;
   name: string;
 }
-export interface Damage {
+interface Damage {
   __typename: string;
   damage_at_slot_level?: DamageAtSlotLevel | null;
   damage_at_character_level?: DamageAtCharacterLevel | null;
   damage_type: ClassesEntityOrDamageTypeOrDcTypeOrSchoolOrSubclassesEntity;
 }
-export interface DamageAtSlotLevel {
+interface DamageAtSlotLevel {
   7?: string | null;
   8?: string | null;
   9?: string | null;
@@ -46,19 +46,19 @@ export interface DamageAtSlotLevel {
   5?: string | null;
   6?: string | null;
 }
-export interface DamageAtCharacterLevel {
+interface DamageAtCharacterLevel {
   1: string;
   5: string;
   11: string;
   17: string;
 }
-export interface Dc {
+interface Dc {
   __typename: string;
   dc_success: string;
   dc_type: ClassesEntityOrDamageTypeOrDcTypeOrSchoolOrSubclassesEntity;
   desc?: null;
 }
-export interface ClassesEntityOrDamageTypeOrDcTypeOrSchoolOrSubclassesEntity1 {
+interface ClassesEntityOrDamageTypeOrDcTypeOrSchoolOrSubclassesEntity1 {
   __typename: string;
   name: string;
 }
