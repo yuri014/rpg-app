@@ -4,6 +4,7 @@ import { ButtonGroup, SearchBar } from 'react-native-elements';
 
 import robe from '../../../assets/icons/robe.png';
 import ReturnButton from '../../components/ReturnButton';
+import SpellSearchCard from './components/SpellSearchCard';
 import styles from './styles';
 
 const initialState = {
@@ -18,7 +19,7 @@ const initialState = {
 function reducer(state: { node: React.ReactNode }, action: { type: number; payload: string }) {
   switch (action.type) {
     case 0:
-      return { node: <Text>spell</Text> };
+      return { node: <SpellSearchCard search={action.payload} /> };
     case 1:
       return { node: <Text>equip</Text> };
     case 2:
@@ -52,7 +53,7 @@ function SearchPage() {
             containerStyle={[styles.searchContainer, styles.shadow]}
             inputContainerStyle={styles.searchBar}
             style={styles.searchInput}
-            onSubmitEditing={() => dispatch({ type: selectedButton, payload: search })}
+            onSubmitEditing={() => dispatch({ type: selectedButton, payload: search.split(' ').join('-').toLowerCase() })}
           />
         </View>
         <View style={styles.mainContainer}>{state && state.node}</View>
