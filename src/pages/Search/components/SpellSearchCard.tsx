@@ -4,7 +4,7 @@ import { Text, View } from 'react-native';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
-import useFilter from '../../hooks/filterHook';
+import useFilter from '../../../hooks/filterHook';
 import { styles } from './styles';
 import { ISpell } from '../../../interface/spellData';
 
@@ -36,7 +36,7 @@ const SpellSearchCard = ({ search }: { search: string }) => {
     <SafeAreaView style={styles.container}>
       <ScrollView horizontal>
         {spells.map((spell) => (
-          <View style={styles.cardContainer}>
+          <View key={spell.name} style={styles.cardContainer}>
             <Text style={styles.title}>{spell.name}</Text>
             <View>
               <Text style={styles.text}>
