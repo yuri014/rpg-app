@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const SEARCH_SPELL_DATA = gql`
-  query filterSpell($search: String!) {
-    spell(filter: { index: $search }) {
+  query filterSpell {
+    spells(limit: 400) {
       area_of_effect {
         size
         type
@@ -32,6 +32,7 @@ export const SEARCH_SPELL_DATA = gql`
       duration
       heal_at_slot_level
       higher_level
+      index
       level
       material
       name
@@ -48,8 +49,8 @@ export const SEARCH_SPELL_DATA = gql`
 `;
 
 export const SEARCH_EQUIP_DATA = gql`
-  query filterArmor($search: String!) {
-    equipment(filter: { index: $search }) {
+  query filterArmor {
+    equipments {
       armor_category
       armor_class {
         base
@@ -78,6 +79,7 @@ export const SEARCH_EQUIP_DATA = gql`
       gear_category {
         name
       }
+      index
       name
       properties {
         name
@@ -114,8 +116,8 @@ export const SEARCH_EQUIP_DATA = gql`
 `;
 
 export const SEARCH_MONSTER_DATA = gql`
-  query filterMonsters($search: String!) {
-    monster(filter: { index: $search }) {
+  query filterMonsters {
+    monsters {
       actions {
         attack_bonus
         damage {
@@ -141,6 +143,7 @@ export const SEARCH_MONSTER_DATA = gql`
       }
       hit_dice
       hit_points
+      index
       intelligence
       languages
       legendary_actions {
