@@ -49,7 +49,7 @@ export const SEARCH_SPELL_DATA = gql`
 `;
 
 export const SEARCH_EQUIP_DATA = gql`
-  query filterArmor {
+  query filterEquip {
     equipments {
       armor_category
       armor_class {
@@ -65,6 +65,7 @@ export const SEARCH_EQUIP_DATA = gql`
       }
       cost {
         quantity
+        unit
       }
       damage {
         damage_dice
