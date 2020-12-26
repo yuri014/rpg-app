@@ -5,6 +5,7 @@ import { ButtonGroup, SearchBar } from 'react-native-elements';
 import robe from '../../../assets/icons/robe.png';
 import ReturnButton from '../../components/ReturnButton';
 import EquipSearchCard from './components/EquipSearchCard';
+import MonsterSearchCard from './components/MonsterSearchCard';
 import SpellSearchCard from './components/SpellSearchCard';
 import styles from './styles';
 
@@ -24,7 +25,7 @@ function reducer(state: { node: React.ReactNode }, action: { type: number; paylo
     case 1:
       return { node: <EquipSearchCard search={action.payload} /> };
     case 2:
-      return { node: <Text>monster</Text> };
+      return { node: <MonsterSearchCard search={action.payload} /> };
     default:
       return state;
   }
